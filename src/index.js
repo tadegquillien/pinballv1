@@ -1,12 +1,37 @@
 import React from 'react';
+import { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import ProlificId from './prolificId';
+import { Videodisplay } from './videodisplay'
 import reportWebVitals from './reportWebVitals';
+import { Statsdisplay } from './statsinstruction';
+import ConsentForm from './ConsentForm';
+import { Instructions } from './instructions';
+import Demographics from './Demographics';
+import Ending from './Ending';
+
+const Root = () => {
+  const [ currentPhase, setCurrentPhase ] = useState("prolificId");
+  const [ currentTrial, setCurrentTrial ] = useState(0);
+
+  return(
+    currentPhase === "prolificId" ? <ProlificId setCurrentPhase = {setCurrentPhase}/> :
+    currentPhase === "consentform" ? <ConsentForm setCurrentPhase={setCurrentPhase}/> :
+    currentPhase ===  "instructions" ? <Instructions currentPhase={currentPhase}
+     setCurrentPhase={setCurrentPhase} /> :
+   currentPhase === "main" ?
+    <Videodisplay currentTrial={currentTrial} setCurrentTrial={setCurrentTrial}
+    setCurrentPhase={setCurrentPhase} /> :
+    currentPhase === "demographics" ? <Demographics setCurrentPhase = {setCurrentPhase}/> :
+    currentPhase === "ending" ? <Ending /> : currentPhase
+  )
+  
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Root />
   </React.StrictMode>,
   document.getElementById('root')
 );

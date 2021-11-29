@@ -1,0 +1,10 @@
+.row {
+    display: flex;
+  }
+  
+  .col {
+    flex: 20%;
+    float: left;
+    padding: 5px;
+    color: red;
+  }
